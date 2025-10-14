@@ -116,7 +116,6 @@ describe('GitHub Actions Workflow: .github/workflows/test.yml', () => {
   describe('defensive checks and edge cases', () => {
     test('no unexpected extra top-level keys (only a sanity check)', () => {
       const { doc } = loadWorkflow();
-      const allowed = new Set(['permissions','name','on','env','jobs']);
       const keys = Object.keys(doc || {});
       // Allow additional keys in case of future expansion; warn but do not fail.
       // This test ensures at least we have the required set.
