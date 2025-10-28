@@ -45,6 +45,13 @@ jobs:
           --output-file eslint-results.sarif
         continue-on-error: true
 
+      - name: Ensure SARIF file exists
+        if: always()
+        run: |
+          if [ ! -f eslint-results.sarif ]; then
+            echo '{"version":"2.1.0","$schema":"https://raw.githubusercontent.com/oasis-tcs/sarif-spec/master/Schemata/sarif-schema-2.1.0.json","runs":[]}' > eslint-results.sarif
+          fi
+
       - name: Upload analysis results to GitHub
         uses: github/codeql-action/upload-sarif@v3
         with:
